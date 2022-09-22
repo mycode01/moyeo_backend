@@ -17,6 +17,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  config: # 기존 profile include 방식에서 부트2.4에서는 멍청한 방향으로 변경되었기 때문에 레거시 설정 사용
+    use-legacy-processing: true
+  profiles:
+    include: oauth
 
 logging:
   level:
@@ -25,12 +29,16 @@ logging:
         moyeo:
           study: debug
 
+
 moyeo:
   auth:
     header:
       scheme: X-MOYEO-AUTH-TOKEN
+    redirect:
+      whenLoginSuccess:
+        uri: '/for_test_uri' #임시 url, 존재 x
   jwt:
-    secret:
+    secret: ObN1YjTovA4khj07ox/L5OUVx5g55KOY272DCU2ARtk=
     expiryMills: 3600000
 
 springdoc:
