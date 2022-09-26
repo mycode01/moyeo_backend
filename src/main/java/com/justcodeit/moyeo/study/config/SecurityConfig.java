@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,7 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private final OAuthUserService oAuthUserService;
   private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
   private final TokenAuthFilter tokenAuthFilter;
-
 
   @Bean
   public AuthenticationManager authenticationManager() throws Exception {
@@ -60,4 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        .failureHandler();// 그럴일은 없어보이지만, 필요한 정보가 선택적일때 누락되어 보내질수 있으므로 작성할때는 이쪽에.
 
   }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+  } // 없으면 스프링 시큐리티의 버그로 @SpringBootTest 시 발광을 하기 때문에 추가
 }
