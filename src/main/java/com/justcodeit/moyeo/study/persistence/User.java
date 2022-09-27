@@ -10,11 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * querydsl 테스트용 엔티티입니다.
  * 실제로 사용하지 않을 가능성이 높습니다.
  */
+@Setter
+@Getter
 @Entity
 @Table(name = "users")
 public class User {
@@ -29,8 +32,10 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Role role;
 
+  public User() {
 
-  private User(){} //for jpa reflection
+  }
+
   public User(String username, String email, String picture, Role role) {
     this.username = username;
     this.email = email;
