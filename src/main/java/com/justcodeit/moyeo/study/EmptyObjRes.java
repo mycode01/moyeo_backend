@@ -8,7 +8,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class EmptyObjRes extends SuccessRes<Map<String, Object>> {
-    public EmptyObjRes() {
-        super(new HashMap<>());
-    }
+
+  public EmptyObjRes() {
+    super(new HashMap<>());
+  }
 }

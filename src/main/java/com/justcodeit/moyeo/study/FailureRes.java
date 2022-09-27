@@ -7,27 +7,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class FailureRes<T> extends BaseResponse {
-    private String message;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private T data;
+  private String message;
 
-    public FailureRes(int code, String message) {
-        super(code);
-        this.message = message;
-    }
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private T data;
 
-    public FailureRes(int code, String message, T data) {
-        super(code);
-        this.message = message;
-        this.data = data;
-    }
+  public FailureRes(int code, String message) {
+    super(code);
+    this.message = message;
+  }
 
-    public String getMessage() {
-        return message;
-    }
+  public FailureRes(int code, String message, T data) {
+    super(code);
+    this.message = message;
+    this.data = data;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

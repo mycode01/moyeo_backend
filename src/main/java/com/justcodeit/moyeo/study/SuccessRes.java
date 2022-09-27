@@ -8,16 +8,17 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SuccessRes<T> extends BaseResponse {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private T data;
 
-    public SuccessRes() {
-        super(200);
-        data = null;
-    }
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private T data;
 
-    public SuccessRes(T data) {
-        super(200);
-        this.data = data;
-    }
+  public SuccessRes() {
+    super(200);
+    data = null;
+  }
+
+  public SuccessRes(T data) {
+    super(200);
+    this.data = data;
+  }
 }
