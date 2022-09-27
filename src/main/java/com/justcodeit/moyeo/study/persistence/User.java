@@ -7,10 +7,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 /**
  * querydsl 테스트용 엔티티입니다.
@@ -32,6 +37,9 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Role role;
 
+  @JsonBackReference("post-user")
+  @OneToMany(mappedBy = "user")
+  private List<Post> posts;
   public User() {
 
   }
