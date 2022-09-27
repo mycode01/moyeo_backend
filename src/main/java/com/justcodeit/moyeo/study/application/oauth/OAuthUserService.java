@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class OAuthUserService implements OAuth2UserService {
 
   private final DefaultOAuth2UserService defaultOAuth2UserService;
-  private final UserRepository userRepo;
+  private final UserRepository userRepository;
   private final ModelConverter<ProviderUserInfo, User> userConverter;
 
   @Override
@@ -42,9 +42,9 @@ public class OAuthUserService implements OAuth2UserService {
   }
 
   private User saveOrUpdate(ProviderUserInfo info) {
-    var user = userRepo.findByEmail(info.getEmail())
+    var user = userRepository.findByEmail(info.getEmail())
         .map(e -> e.update(info.getName(), info.getPicture()))
         .orElse(userConverter.convert(info));
-    return userRepo.save(user);
+    return userRepository.save(user);
   }
 }
