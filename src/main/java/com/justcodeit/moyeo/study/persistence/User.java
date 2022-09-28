@@ -44,7 +44,11 @@ public class User {
     return this;
   }
 
-  public String getRoleKey(){
+  public String getUsername() {
+    return this.username;
+  }
+
+  public String getRoleKey() {
     return this.role.getKey();
   }
 
