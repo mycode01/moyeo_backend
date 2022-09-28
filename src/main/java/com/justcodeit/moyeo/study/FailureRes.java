@@ -23,12 +23,4 @@ public class FailureRes<T> extends BaseResponse {
     this.message = message;
     this.data = data;
   }
-
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
 }

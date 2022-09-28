@@ -8,6 +8,8 @@ public class BaseResponse {
     this.code = code;
   }
 
+  private BaseResponse(){}
+
   public int getCode() {
     return code;
   }
