@@ -1,38 +1,72 @@
 package com.justcodeit.moyeo.study;
 
-import com.justcodeit.moyeo.study.model.jwt.UserToken;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.justcodeit.moyeo.study.persistence.repository.CustomPostRepository;
+import com.justcodeit.moyeo.study.persistence.repository.CustomUserRepository;
+import com.justcodeit.moyeo.study.persistence.Post;
+import com.justcodeit.moyeo.study.persistence.repository.PostJPARepository;
+import com.justcodeit.moyeo.study.persistence.User;
+import com.justcodeit.moyeo.study.persistence.repository.UserJPARepository;
+import com.justcodeit.moyeo.study.persistence.response.PostUserResponseDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * 테스트용 컨트롤러입니다.
  */
-@Controller
+@RequiredArgsConstructor
+@RestController
 public class DefaultController {
 
-  @RequestMapping("/")
-  public String login(Model model) {
-
-    return "login";
+  private final CustomUserRepository customuserRepository;
+  private final CustomPostRepository customPostRepository;
+  private final UserJPARepository userJPARepository;
+  private final PostJPARepository postRepository;
+  @GetMapping("hello")
+  public String hello(){
+    return "hello world";
   }
 
-  @RequestMapping("/me")
-  public String me(Model model, @AuthenticationPrincipal UserToken userToken) {
-    // 인가 처리가 되지 않아도 진행이 가능하므로, userToken의 null 체크가 되지 않으면 500발생
-    model.addAttribute("name", userToken.getUsername());
-    return "loggedIn";
+  @GetMapping("hi")
+  public List<User> hello2(){
+    return customuserRepository.findByName("hi2");
   }
 
-  //  @PreAuthorize("hasRole('ROLE_USER')")
-  @Secured("ROLE_USER") // 로 대체가능
-  @RequestMapping("/hello")
-  public String hello(Model model, @AuthenticationPrincipal UserToken userToken) {
+  @PostMapping("/member")
+  public User createMember(){
+    long count = userJPARepository.count();
+    String username = "testUser"+count;
+    String email = "testUser"+count+"@gmail.com";
+    User user = new User(username, email, null, User.Role.USER);
+    return userJPARepository.save(user);
+  }
 
-    model.addAttribute("name", userToken.getUsername());
-    return "helloworld"; // /me 와 내용은 완전히 같지만 이쪽은 인가처리가 되지 않으면 동작 x
+  @PostMapping("/post1")
+  public Post createPost(){
+    long count = postRepository.count();
+    String title = "testTitle"+ count;
+    String contents = "testTitle"+ count+"'s Contens";
+    User user = userJPARepository.findById(count+1).get();
+    Post post = new Post(title, contents, user);
+
+    return postRepository.save(post);
+  }
+
+  @GetMapping("/join-test")
+  public List<PostUserResponseDto> getJoinedPost(){
+    List<Post> userPosts = customPostRepository.getUserPosts();
+    List<PostUserResponseDto> responseDtos = new ArrayList<>();
+
+    // 무한 순환 참조 떄문에 Dto로 만들어서 전달. Mapstruct를 미사용.
+    for (Post post: userPosts) {
+      responseDtos.add(new PostUserResponseDto(post));
+    }
+
+    return responseDtos;
   }
 }
