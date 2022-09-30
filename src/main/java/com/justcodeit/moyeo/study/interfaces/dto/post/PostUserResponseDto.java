@@ -1,5 +1,6 @@
-package com.justcodeit.moyeo.study.persistence.response;
+package com.justcodeit.moyeo.study.interfaces.dto.post;
 
+import com.justcodeit.moyeo.study.interfaces.dto.user.UserResponseDto;
 import com.justcodeit.moyeo.study.persistence.Post;
 import lombok.Getter;
 import lombok.Setter;

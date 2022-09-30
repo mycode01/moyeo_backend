@@ -1,12 +1,8 @@
-package com.justcodeit.moyeo.study.persistence.response;
+package com.justcodeit.moyeo.study.interfaces.dto.user;
 
 import com.justcodeit.moyeo.study.persistence.User;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Setter
 @Getter

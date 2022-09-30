@@ -1,4 +1,4 @@
-package com.justcodeit.moyeo.study;
+package com.justcodeit.moyeo.study.interfaces.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

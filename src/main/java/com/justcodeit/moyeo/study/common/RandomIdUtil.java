@@ -1,4 +1,4 @@
-package com.justcodeit.moyeo.study;
+package com.justcodeit.moyeo.study.common;
 
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;

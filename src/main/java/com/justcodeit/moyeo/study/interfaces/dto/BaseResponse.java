@@ -1,4 +1,4 @@
-package com.justcodeit.moyeo.study;
+package com.justcodeit.moyeo.study.interfaces.dto;
 
 
 public class BaseResponse {

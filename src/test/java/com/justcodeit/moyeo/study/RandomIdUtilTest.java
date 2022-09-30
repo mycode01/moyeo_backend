@@ -1,7 +1,6 @@
 package com.justcodeit.moyeo.study;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import com.justcodeit.moyeo.study.common.RandomIdUtil;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.justcodeit.moyeo.study;
+package com.justcodeit.moyeo.study.interfaces.dto;
 
 import java.util.HashMap;
 import java.util.Map;

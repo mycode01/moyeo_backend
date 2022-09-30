@@ -1,22 +1,21 @@
 package com.justcodeit.moyeo.study.persistence.repository;
 
+import com.justcodeit.moyeo.study.persistence.QUser;
 import com.justcodeit.moyeo.study.persistence.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
-import com.justcodeit.moyeo.study.persistence.QUser;
-
-import java.util.List;
 
 /**
- * querydsl 테스트용 레파지토리입니다.
- * 실제로 사용하지 않습니다.
+ * querydsl 테스트용 레파지토리입니다. 실제로 사용하지 않습니다.
  */
 @Repository
-public class CustomUserRepository extends QuerydslRepositorySupport {
+public class UserCustomRepository extends QuerydslRepositorySupport {
+
   private final JPAQueryFactory queryFactory;
 
-  public CustomUserRepository(JPAQueryFactory queryFactory) {
+  public UserCustomRepository(JPAQueryFactory queryFactory) {
     super(User.class);
     this.queryFactory = queryFactory;
   }
