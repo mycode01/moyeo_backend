@@ -32,8 +32,15 @@ public class ProviderUserInfo {
       return ofNaver("id", attributes);
     } else if ("kakao".equals(registrationId)) {
       return ofKakao("id", attributes);
+    } else if ("github".equals(registrationId)) {
+      return ofGithub("id", attributes);
     }
     return ofGoogle(userNameAttributeName, attributes);
+  }
+
+  private static ProviderUserInfo ofGithub(String userNameAttributeName, Map<String, Object> attributes) {
+    return new ProviderUserInfo(attributes, userNameAttributeName, (String) attributes.get("name"),
+            (String) attributes.get("email"), (String) attributes.get("avatar_url"));
   }
 
   private static ProviderUserInfo ofGoogle(String userNameAttributeName,
