@@ -17,10 +17,8 @@ import javax.persistence.Table;
  * 실제로 사용하지 않을 가능성이 높습니다.
  */
 
-@Setter
-@Getter
 @Entity
-@Table(name = "posts")
+@Table(name = "post")
 public class Post {
 
   @Id
@@ -29,25 +27,12 @@ public class Post {
   private String title;
   private String content;
 
-  @JsonManagedReference("post-user")
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
 
-  public Post(String title, String content, User user) {
+  private Post() {
+  }
+
+  public Post(String title, String content) {
     this.title = title;
     this.content = content;
-    this.user = user;
   }
-
-  public Post() {
-
-  }
-
-  public Post update(String title, String content) {
-    this.title = title;
-    this.content = content;
-    return this;
-  }
-
 }

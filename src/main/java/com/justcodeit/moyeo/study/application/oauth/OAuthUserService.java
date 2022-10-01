@@ -4,7 +4,7 @@ import com.justcodeit.moyeo.study.model.ModelConverter;
 import com.justcodeit.moyeo.study.model.oauth.ProviderUserInfo;
 import com.justcodeit.moyeo.study.model.session.UserPrincipal;
 import com.justcodeit.moyeo.study.persistence.User;
-import com.justcodeit.moyeo.study.persistence.repository.UserJPARepository;
+import com.justcodeit.moyeo.study.persistence.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class OAuthUserService implements OAuth2UserService {
 
   private final DefaultOAuth2UserService defaultOAuth2UserService;
-  private final UserJPARepository userRepository;
+  private final UserRepository userRepository;
   private final ModelConverter<ProviderUserInfo, User> userConverter;
 
   @Override

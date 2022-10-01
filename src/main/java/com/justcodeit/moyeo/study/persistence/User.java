@@ -17,14 +17,8 @@ import lombok.Setter;
 
 import java.util.List;
 
-/**
- * querydsl 테스트용 엔티티입니다.
- * 실제로 사용하지 않을 가능성이 높습니다.
- */
-@Setter
-@Getter
 @Entity
-@Table(name = "users")
+@Table(name = "users") // user가 예약어
 public class User {
 
   @Id
@@ -37,11 +31,7 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Role role;
 
-  @JsonBackReference("post-user")
-  @OneToMany(mappedBy = "user")
-  private List<Post> posts;
-  public User() {
-
+  private User() {
   }
 
   public User(String username, String email, String picture, Role role) {
