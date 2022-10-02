@@ -64,4 +64,4 @@ jobs:
         key: ${{ secrets.STG_PEM_KEYPAIR }}
         script: |
             chmod 755 study-0.0.1-SNAPSHOT.jar
-            nohup java -jar study-0.0.1-SNAPSHOT.jar --spring.profiles.active=staging 
+            nohup java -jar study-0.0.1-SNAPSHOT.jar --spring.profiles.active=staging > /dev/null &
