@@ -4,6 +4,7 @@ import com.justcodeit.moyeo.study.model.jwt.UserToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 테스트용 컨트롤러입니다.
  */
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class DefaultController {
 
   @RequestMapping("/")
