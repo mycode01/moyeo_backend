@@ -21,10 +21,10 @@ jobs:
         distribution: 'temurin'
     - name: replace config string
       run: |
-          sed -i "s/dburlhere/'$DB_URL'/g" src/main/resources/application-staging.yml 
-          sed -i "s/dbuserhere/'$DB_USER'/g" src/main/resources/application-staging.yml 
-          sed -i "s/dbpasswordhere/'$DB_PASS'/g" src/main/resources/application-staging.yml 
-          sed -i "s/jwtsecrethere/'$JWT_SECRET'/g" src/main/resources/application-staging.yml 
+          sed -i "s%dburlhere%$DB_URL%g" src/main/resources/application-staging.yml 
+          sed -i "s%dbuserhere%$DB_USER%g" src/main/resources/application-staging.yml 
+          sed -i "s%dbpasswordhere%$DB_PASS%g" src/main/resources/application-staging.yml 
+          sed -i "s%jwtsecrethere%$JWT_SECRET%g" src/main/resources/application-staging.yml 
           echo "$OAUTH_CONFIG" > src/main/resourcces/application-auth.yml
       env:
         OAUTH_CONFIG: ${{secrets.STG_AUTH_CONFIG}}
