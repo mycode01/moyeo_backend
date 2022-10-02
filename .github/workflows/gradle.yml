@@ -1,0 +1,62 @@
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "staging" ]
+  pull_request:
+    branches: [ "staging" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    - name: replace config string
+      run: |
+          sed -i "s/dburlhere/${{secrets.STG_DB_HOST}}/g" src/main/resources/application-staging.yml 
+          sed -i "s/dbuserhere/${{secrets.STG_DB_USERNAME}}/g" src/main/resources/application-staging.yml 
+          sed -i "s/dbpasswordhere/${{secrets.STG_DB_PASSWORD}}/g" src/main/resources/application-staging.yml 
+          sed -i "s/jwtsecrethere/${{secrets.STG_JWT_SECRET}}/g" src/main/resources/application-staging.yml 
+          echo "$OAUTH_CONFIG" > src/main/resourcces/application-auth.yml
+      env:
+        OAUTH_CONFIG: ${{secrets.STG_AUTH_CONFIG}}
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: build
+    - name: Stop application
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: kill -9 `pgrep -f study-0.0.1-SNAPSHOT.jar`
+        host: ${{ secrets.STG_HOST }}
+        username: ec2-user
+        privateKey: ${{ secrets.STG_PEM_KEYPAIR}}
+      env:
+        CI: true
+    - name: Publish jar
+      uses: nogsantos/scp-deploy@master
+      with:
+        src: ./target/study-0.0.1-SNAPSHOT.jar
+        host: ${{ secrets.STG_HOST }}
+        remote: .
+        port: 22
+        user: ec2-user
+        key: ${{ secrets.STG_PEM_KEYPAIR }}
+    - name: Start application
+      uses: appleboy/ssh-action@dce9d565de8d876c11d93fa4fe677c0285a66d78
+      with:
+        host: ${{ secrets.STG_HOST }}
+        port: 22
+        username: ec2-user
+        key: ${{ secrets.STG_PEM_KEYPAIR }}
+        script: |
+            chmod 755 study-0.0.1-SNAPSHOT.jar
+            nohup java -jar study-0.0.1-SNAPSHOT.jar --spring.profiles.active=staging 
