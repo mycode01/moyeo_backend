@@ -20,7 +20,9 @@ spring:
   config: # 기존 profile include 방식에서 부트2.4에서는 멍청한 방향으로 변경되었기 때문에 레거시 설정 사용
     use-legacy-processing: true
   profiles:
-    include: oauth
+    include:
+      - oauth
+      - aws
 
 logging:
   level:
@@ -28,7 +30,6 @@ logging:
       justcodeit:
         moyeo:
           study: debug
-
 
 moyeo:
   auth:
@@ -43,4 +44,3 @@ moyeo:
 
 springdoc:
   default-consumes-media-type: text/yaml
-
