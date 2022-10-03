@@ -7,7 +7,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -26,7 +25,7 @@ public class DefaultController {
   @RequestMapping("/me")
   public String me(Model model, @AuthenticationPrincipal UserToken userToken) {
     // 인가 처리가 되지 않아도 진행이 가능하므로, userToken의 null 체크가 되지 않으면 500발생
-    model.addAttribute("name", userToken.getUsername());
+    model.addAttribute("name", userToken.getDisplayName());
     return "loggedIn";
   }
 
@@ -35,7 +34,7 @@ public class DefaultController {
   @RequestMapping("/hello")
   public String hello(Model model, @AuthenticationPrincipal UserToken userToken) {
 
-    model.addAttribute("name", userToken.getUsername());
+    model.addAttribute("name", userToken.getDisplayName());
     return "helloworld"; // /me 와 내용은 완전히 같지만 이쪽은 인가처리가 되지 않으면 동작 x
   }
 }

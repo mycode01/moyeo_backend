@@ -18,9 +18,11 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 @AllArgsConstructor
 public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
 
-  private final String userId;
-  private final String providerType;
+  private final String displayName;
+  private final String email;
   private final String roleType;
+  private final String domesticId;
+  private final String providerType;
   private final Collection<GrantedAuthority> authorities;
   private Map<String, Object> attributes;
 
@@ -41,13 +43,14 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
 
   @Override
   public String getName() {
-    return userId;
+    return displayName;
   }
 
   @Override
   public String getUsername() {
-    return userId;
+    return email;
   }
+  // security 에서 username 은 id를 뜻한다
 
   @Override
   public boolean isAccountNonExpired() {
@@ -86,10 +89,11 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
 
   public static UserPrincipal create(User user) {
     return new UserPrincipal(
-        user.getUsername(),
-//        user.getProviderType(),
-        "", // todo user 엔티티에 프로바이더 타입을 추가합시다
+        user.getDisplayName(),
+        user.getEmail(),
         user.getRoleKey(),
+        user.getDomesticId(),
+        user.getProviderType(),
         Collections.singletonList(new SimpleGrantedAuthority(user.getRoleKey())),
         null
     );

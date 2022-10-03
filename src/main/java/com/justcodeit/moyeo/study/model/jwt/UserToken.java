@@ -1,12 +1,13 @@
 package com.justcodeit.moyeo.study.model.jwt;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @AllArgsConstructor
 public class UserToken {
 
-  String role;
-  String username;
+  private String email;
+  private String displayName;
+  private String role;
 }
