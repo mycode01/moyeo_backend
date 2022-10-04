@@ -1,4 +1,4 @@
-package com.justcodeit.moyeo.study.model.aws.s3;
+package com.justcodeit.moyeo.study.application.aws.s3;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
@@ -26,6 +26,9 @@ public class S3Service {
     private final AmazonS3 amazonS3;
     private final TransferManager transferManager;
 
+    @Value("${s3EndPoint}")
+    private final String S3_ENDPOINT;
+
     /**
      * S3에 한개의 파일 업로드 하는 코드
      * 단일 파일 업로드하기 위해서 사용.
@@ -33,7 +36,7 @@ public class S3Service {
      * @return
      * @throws IOException
      */
-    public String upload(MultipartFile multipartFile) throws IOException {
+    public String fileUpload(MultipartFile multipartFile) throws IOException {
         String fileName = multipartFile.getOriginalFilename();
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -47,9 +50,9 @@ public class S3Service {
      * S3에 로컬 폴더를 업로드 하는 코드.
      * S3의 폴더 구조를 로컬 C 드라이브의 폴더에 맞추기 위해서 virtualDirectoryKeyPrefix를 ""로 설정
      */
-    public void upload2(String path) {
+    public void directoryUpload(String path) {
         File file = new File(path);
-        transferManager.uploadDirectory(bucket, "", file, true);
+        transferManager.uploadDirectory(bucket, path, file, true);
     }
 
     /**
@@ -62,10 +65,8 @@ public class S3Service {
 
         for (S3ObjectSummary s3ObjectSummary : listObjectsV2Result.getObjectSummaries()) {
             String s3FileLocation = s3ObjectSummary.getKey();
-
             s3FileLocationList.add(s3FileLocation);
         }
-
         return s3FileLocationList;
     }
 }
