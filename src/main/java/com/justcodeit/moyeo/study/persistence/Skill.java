@@ -1,5 +1,7 @@
 package com.justcodeit.moyeo.study.persistence;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
@@ -12,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "skill")
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
