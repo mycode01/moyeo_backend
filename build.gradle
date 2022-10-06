@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.3'
+	id 'org.springframework.boot' version "${springBootVersion}"
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
@@ -25,14 +25,20 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 임시 oauth 테스트용
+
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
-	compileOnly 'org.projectlombok:lombok'
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation "org.mapstruct:mapstruct:${mapStructVersion}"
+	implementation "org.projectlombok:lombok-mapstruct-binding:${mapstructBindingVersion}"
+
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapstructBindingVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
@@ -40,6 +46,9 @@ dependencies {
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.311'
+	implementation 'org.apache.commons:commons-text:1.9'
 }
 
 tasks.named('test') {
