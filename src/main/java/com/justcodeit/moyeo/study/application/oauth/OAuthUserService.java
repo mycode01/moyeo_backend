@@ -42,9 +42,10 @@ public class OAuthUserService implements OAuth2UserService {
   }
 
   private User saveOrUpdate(ProviderUserInfo info) {
-    var user = userRepository.findByEmail(info.getEmail())
+    var user = userRepository.findByDomesticIdAndProviderType(
+            info.getDomesticId(), info.getProviderType())
         .map(e -> e.update(info.getName(), info.getPicture()))
         .orElse(userConverter.convert(info));
     return userRepository.save(user);
-  }
+  } //github 은 email이 변경이 가능한 서비스이기 때문에 업데이트를 해주는게 맞는지...
 }

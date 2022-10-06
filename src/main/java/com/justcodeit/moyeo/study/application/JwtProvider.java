@@ -22,10 +22,11 @@ public class JwtProvider {
     var now = new Date();
     var expiry = new Date(now.getTime() + expireMills);
 
-    return jwtBuilder.setSubject((String) claims.get("username"))
+    return jwtBuilder
+        .setClaims(claims)
         .setIssuedAt(now)
         .setExpiration(expiry)
-        .setClaims(claims)
+        .setSubject((String) claims.get("displayName"))
         .compact();
   }
 
