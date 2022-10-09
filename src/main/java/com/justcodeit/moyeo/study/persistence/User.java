@@ -1,5 +1,6 @@
 package com.justcodeit.moyeo.study.persistence;
 
+import com.justcodeit.moyeo.study.model.type.Role;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 
@@ -70,15 +69,6 @@ public class User {
 
   public String getDomesticId() {
     return domesticId;
-  }
-
-  @RequiredArgsConstructor
-  @Getter
-  public enum Role {
-    USER("ROLE_USER", "일반사용자"),
-    GUEST("GUEST_USER", "게스트");
-    private final String key;
-    private final String title;
   }
 
 }

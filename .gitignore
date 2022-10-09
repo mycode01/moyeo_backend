@@ -305,3 +305,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,intellij,visualstudiocode,eclipse
 application-oauth.yml
 application-prod.yml
+application-aws.yml

@@ -1,4 +1,4 @@
-package com.justcodeit.moyeo.study.application.aws.s3;
+package com.justcodeit.moyeo.study.config;
 
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

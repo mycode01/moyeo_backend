@@ -1,8 +1,8 @@
 package com.justcodeit.moyeo.study.model;
 
 import com.justcodeit.moyeo.study.model.oauth.ProviderUserInfo;
+import com.justcodeit.moyeo.study.model.type.Role;
 import com.justcodeit.moyeo.study.persistence.User;
-import com.justcodeit.moyeo.study.persistence.User.Role;
 import org.springframework.stereotype.Component;
 
 @Component

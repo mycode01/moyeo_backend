@@ -1,12 +1,12 @@
 package com.justcodeit.moyeo.study.config;
 
 import com.justcodeit.moyeo.study.application.JwtProvider;
+import com.justcodeit.moyeo.study.common.RandomIdUtil;
 import com.justcodeit.moyeo.study.config.filter.TokenAuthFilter;
 import com.justcodeit.moyeo.study.model.jwt.AuthTokenConverter;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,6 +52,11 @@ public class ApplicationConfig {
   @Bean
   public DefaultOAuth2UserService defaultOAuth2UserService() {
     return new DefaultOAuth2UserService();
+  }
+
+  @Bean
+  public RandomIdUtil randomIdUtil() {
+    return new RandomIdUtil();
   }
 }
 

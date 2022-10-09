@@ -2,13 +2,12 @@ package com.justcodeit.moyeo.study.application.skill;
 
 import com.justcodeit.moyeo.study.application.aws.s3.S3Service;
 import com.justcodeit.moyeo.study.model.skill.SkillCategoryConverter;
+import com.justcodeit.moyeo.study.model.type.SkillCategory;
 import com.justcodeit.moyeo.study.persistence.Skill;
-import com.justcodeit.moyeo.study.persistence.SkillCategory;
 import com.justcodeit.moyeo.study.persistence.repository.SkillRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

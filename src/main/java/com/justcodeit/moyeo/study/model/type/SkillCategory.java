@@ -1,4 +1,4 @@
-package com.justcodeit.moyeo.study.persistence;
+package com.justcodeit.moyeo.study.model.type;
 
 import lombok.Getter;
 

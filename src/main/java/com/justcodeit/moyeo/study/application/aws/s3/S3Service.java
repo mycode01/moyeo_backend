@@ -5,16 +5,15 @@ import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.transfer.TransferManager;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -26,12 +25,12 @@ public class S3Service {
     private final AmazonS3 amazonS3;
     private final TransferManager transferManager;
 
-    @Value("${s3EndPoint}")
-    private final String S3_ENDPOINT;
+    @Value("${moyeo.url.s3EndPoint}")
+    private String S3_ENDPOINT;
 
     /**
-     * S3에 한개의 파일 업로드 하는 코드
-     * 단일 파일 업로드하기 위해서 사용.
+     * S3에 한개의 파일 업로드 하는 코드 단일 파일 업로드하기 위해서 사용.
+     *
      * @param multipartFile
      * @return
      * @throws IOException
