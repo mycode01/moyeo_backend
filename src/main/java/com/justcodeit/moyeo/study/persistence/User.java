@@ -23,6 +23,10 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  private String userId;
+
+  private String nickname;
   private String email;
   private String picture;
   @Enumerated(EnumType.STRING)
@@ -35,8 +39,10 @@ public class User {
   private User() {
   }
 
-  public User(String email, String picture, Role role, String displayName, String providerType,
+  public User(String userId, String nickname, String email, String picture, Role role, String displayName, String providerType,
       String domesticId) {
+    this.userId = userId;
+    this.nickname = nickname;
     this.email = email;
     this.picture = picture;
     this.role = role;
@@ -71,4 +77,11 @@ public class User {
     return domesticId;
   }
 
+  public String getUserId() {
+    return userId;
+  }
+
+  public String getNickname() {
+    return nickname;
+  }
 }

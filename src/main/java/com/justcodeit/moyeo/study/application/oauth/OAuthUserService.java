@@ -1,5 +1,6 @@
 package com.justcodeit.moyeo.study.application.oauth;
 
+import com.justcodeit.moyeo.study.common.UserIdGenerator;
 import com.justcodeit.moyeo.study.model.ModelConverter;
 import com.justcodeit.moyeo.study.model.oauth.ProviderUserInfo;
 import com.justcodeit.moyeo.study.model.session.UserPrincipal;
@@ -22,6 +23,7 @@ public class OAuthUserService implements OAuth2UserService {
   private final DefaultOAuth2UserService defaultOAuth2UserService;
   private final UserRepository userRepository;
   private final ModelConverter<ProviderUserInfo, User> userConverter;
+  private final UserIdGenerator userIdGenerator;
 
   @Override
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -34,7 +36,7 @@ public class OAuthUserService implements OAuth2UserService {
         .getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
     log.debug(oAuth2User.getName());
 
-    ProviderUserInfo info = ProviderUserInfo.of(providerId, userNameAttributeName,
+    ProviderUserInfo info = ProviderUserInfo.of(providerId, userNameAttributeName, userIdGenerator.userId(),
         oAuth2User.getAttributes());
     var user = saveOrUpdate(info);
 

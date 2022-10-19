@@ -10,7 +10,7 @@ public class OAuthInfoToUserConverter implements ModelConverter<ProviderUserInfo
 
   @Override
   public User convert(ProviderUserInfo s) {
-    return new User(s.getEmail(), s.getPicture(), Role.USER, s.getName(), s.getProviderType(),
-        s.getDomesticId());
+    return new User(s.getUserId(), s.getName(), s.getEmail(), s.getPicture(), Role.USER, s.getName(),
+        s.getProviderType(), s.getDomesticId());
   }
 }

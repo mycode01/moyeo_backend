@@ -1,22 +1,31 @@
 package com.justcodeit.moyeo.study.persistence;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.Setter;
+import com.justcodeit.moyeo.study.model.type.GatherType;
+import com.justcodeit.moyeo.study.model.type.GroupType;
+import com.justcodeit.moyeo.study.model.type.PostState;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-/**
- * querydsl 테스트용 엔티티입니다.
- * 실제로 사용하지 않을 가능성이 높습니다.
- */
-
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "post")
 public class Post {
@@ -24,15 +33,125 @@ public class Post {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  private String postId;
+
+  private String ownerId;
+
+  @Enumerated(EnumType.STRING)
+  private PostState state;
+
   private String title;
+
   private String content;
+
+  private String contact;
+
+  @Enumerated(EnumType.STRING)
+  private GroupType groupType;
+
+  @Enumerated(EnumType.STRING)
+  private GatherType gatherType;
+
+  @ElementCollection
+  private Map<String, Integer> recruitMember;
+
+  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  private Set<PostSkill> skillTags;
+
+  private LocalDateTime postDate;
+
+  private long hits;
+
+  @CreatedDate
+  @Column(updatable = false)
+  private LocalDateTime createdAt;
+
+  @LastModifiedDate
+  private LocalDateTime updatedAt;
 
 
   private Post() {
   }
 
-  public Post(String title, String content) {
+  public Post(String postId, String ownerId, PostState state, String title, String content,
+      String contact, GroupType groupType, GatherType gatherType,
+      Map<String, Integer> recruitMember,
+      Set<PostSkill> skillTags,
+      LocalDateTime postDate, long hits) {
+    this.postId = postId;
+    this.ownerId = ownerId;
+    this.state = state;
     this.title = title;
     this.content = content;
+    this.contact = contact;
+    this.groupType = groupType;
+    this.gatherType = gatherType;
+    this.recruitMember = recruitMember;
+    this.skillTags = skillTags;
+    this.postDate = postDate;
+    this.hits = hits;
   }
+
+  public String getPostId() {
+    return postId;
+  }
+
+  public String getOwnerId() {
+    return ownerId;
+  }
+
+  public PostState getState() {
+    return state;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public String getContact() {
+    return contact;
+  }
+
+  public GroupType getGroupType() {
+    return groupType;
+  }
+
+  public GatherType getGatherType() {
+    return gatherType;
+  }
+
+  public Map<String, Integer> getRecruitMember() {
+    return recruitMember;
+  }
+
+  public Set<PostSkill> getSkillTags() {
+    return skillTags;
+  }
+
+
+  public LocalDateTime getPostDate() {
+    return postDate;
+  }
+
+  public long getPostDate(ZoneId zoneId) {
+    return postDate.atZone(zoneId).toEpochSecond();
+  }
+
+  public long getHits() {
+    return hits;
+  }
+
+  public boolean isOwner(String userId) {
+    return this.ownerId.equals(userId);
+  }
+
+  public void changeState() {
+    this.state = this.state.next();
+  }
+
 }

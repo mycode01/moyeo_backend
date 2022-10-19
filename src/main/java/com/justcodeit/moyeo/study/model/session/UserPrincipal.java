@@ -19,6 +19,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
 
   private final String displayName;
+  private final String nickname;
+  private final String userId;
   private final String email;
   private final String roleType;
   private final String domesticId;
@@ -90,6 +92,8 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
   public static UserPrincipal create(User user) {
     return new UserPrincipal(
         user.getDisplayName(),
+        user.getNickname(),
+        user.getUserId(),
         user.getEmail(),
         user.getRoleKey(),
         user.getDomesticId(),

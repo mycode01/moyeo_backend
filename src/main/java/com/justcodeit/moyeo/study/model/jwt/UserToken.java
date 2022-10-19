@@ -8,6 +8,7 @@ import lombok.Getter;
 public class UserToken {
 
   private String email;
-  private String displayName;
   private String role;
+  private String userId;
+  private String nickname;
 }
