@@ -1,6 +1,10 @@
 package com.justcodeit.moyeo.study.persistence;
 
 import com.justcodeit.moyeo.study.model.type.Role;
+import java.util.Collections;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,13 +28,18 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(unique = true)
   private String userId;
-
   private String nickname;
   private String email;
   private String picture;
   @Enumerated(EnumType.STRING)
   private Role role;
+
+  @Column(columnDefinition = "TEXT")
+  private String introduce;
+  @ElementCollection
+  private Set<String> skillTags;
 
   private String displayName; // oauth provider 가 전달하는 이름(혹은 해당 서비스에서의 닉네임), moyeo 내의 닉네임이랑은 다름
   private String providerType;
@@ -39,7 +48,8 @@ public class User {
   private User() {
   }
 
-  public User(String userId, String nickname, String email, String picture, Role role, String displayName, String providerType,
+  public User(String userId, String nickname, String email, String picture, Role role,
+      String displayName, String providerType,
       String domesticId) {
     this.userId = userId;
     this.nickname = nickname;
@@ -49,11 +59,19 @@ public class User {
     this.displayName = displayName;
     this.providerType = providerType;
     this.domesticId = domesticId;
+    this.skillTags = Collections.emptySet();
   }
 
   public User update(String displayName, String picture) {
     this.displayName = displayName;
     this.picture = picture;
+    return this;
+  }
+
+  public User update(String nickname, String introduce, Set<String> skillTags) {
+    this.nickname = nickname;
+    this.introduce = introduce;
+    this.skillTags = skillTags;
     return this;
   }
 
@@ -83,5 +101,17 @@ public class User {
 
   public String getNickname() {
     return nickname;
+  }
+
+  public String getPicture() {
+    return picture;
+  }
+
+  public String getIntroduce() {
+    return introduce;
+  }
+
+  public Set<String> getSkillTags() {
+    return skillTags;
   }
 }
