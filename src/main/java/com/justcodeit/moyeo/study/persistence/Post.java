@@ -93,6 +93,35 @@ public class Post {
     this.hits = hits;
   }
 
+  public void edit(String title, String content, String contact, GroupType groupType,
+      GatherType gatherType, Set<PostSkill> skillTags, Map<String, Integer> member){
+    this.title = title;
+    this.content = content;
+    this.contact = contact;
+    this.groupType = groupType;
+    this.gatherType = gatherType;
+    this.recruitMember = member;
+    setSkill(skillTags); //
+  }
+
+  private void setSkill(Set<PostSkill> skillTags){
+    this.skillTags.clear();
+//    this.skillTags = skillTags; // hibernate 가 구현하는 방식에 어긋나 문제가 발생함
+    this.skillTags.addAll(skillTags);
+    this.skillTags.forEach(e->e.setPost(this));
+  }
+
+  public boolean isOwner(String userId) {
+    return this.ownerId.equals(userId);
+  }
+
+  public void changeState() {
+    this.state = this.state.next();
+  }
+
+
+
+  // region getters
   public String getPostId() {
     return postId;
   }
@@ -145,13 +174,6 @@ public class Post {
   public long getHits() {
     return hits;
   }
-
-  public boolean isOwner(String userId) {
-    return this.ownerId.equals(userId);
-  }
-
-  public void changeState() {
-    this.state = this.state.next();
-  }
+  // endregion
 
 }

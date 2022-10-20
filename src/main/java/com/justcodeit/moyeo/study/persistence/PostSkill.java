@@ -1,5 +1,6 @@
 package com.justcodeit.moyeo.study.persistence;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,5 +34,24 @@ public class PostSkill {
 
   public String getSkillCode() {
     return this.skillCode;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    PostSkill postSkill = (PostSkill) o;
+
+    return Objects.equals(skillCode, postSkill.skillCode);
+  }
+
+  @Override
+  public int hashCode() {
+    return skillCode != null ? skillCode.hashCode() : 0;
   }
 }

@@ -1,16 +1,12 @@
 package com.justcodeit.moyeo.study.model.post;
 
-import com.justcodeit.moyeo.study.model.type.GatherType;
-import com.justcodeit.moyeo.study.model.type.GroupType;
 import com.justcodeit.moyeo.study.model.type.PostState;
 import com.justcodeit.moyeo.study.persistence.Post;
+import com.justcodeit.moyeo.study.persistence.PostSkill;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +24,7 @@ public class ResMyPostDto {
   public static ResMyPostDto toModel(Slice<Post> slice) {
     var data = slice.getContent().stream().map(e ->
         new MyPostDto(e.getPostId(), e.getState(), e.getTitle(),
+            e.getSkillTags().stream().map(PostSkill::getSkillCode).collect(Collectors.toSet()),
             e.getPostDate(ZoneId.systemDefault()), e.getHits())
     ).collect(Collectors.toUnmodifiableList());
 
@@ -41,6 +38,7 @@ public class ResMyPostDto {
     private String postId;
     private PostState state;
     private String title;
+    private Set<String> skillCodes;
     private long postDate;
     private long hits;
   }

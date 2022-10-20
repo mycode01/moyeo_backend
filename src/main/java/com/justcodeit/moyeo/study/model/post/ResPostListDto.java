@@ -21,7 +21,7 @@ public class ResPostListDto {
 
   public static ResPostListDto toModel(Slice<QueryPostsProjection> slice) {
     var data = slice.getContent().stream().map(e ->
-        new PostData(e.getPostId(), e.getState(), e.getTitle(),
+        new PostData(e.getPostId(), e.getState(), e.getTitle(), e.getSkillCodes(),
             e.getPostDate(ZoneId.systemDefault()), e.getHits())).collect(Collectors.toList());
     return new ResPostListDto(data, slice.getNumber(), slice.getSize(), slice.hasNext());
   }
@@ -33,6 +33,7 @@ public class ResPostListDto {
     private String postId;
     private PostState state;
     private String title;
+    private List<String> skillCodes;
     private long postDate;
     private long hits;
   }

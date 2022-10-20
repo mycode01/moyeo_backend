@@ -14,7 +14,7 @@ public enum PostState {  // 상태 변경에 대한 정책을 회의록에서 �
   }, DELETED {
     @Override
     public PostState next() {
-      throw new UnsupportedOperationException(); // delete 다음은 정해진바 없음
+      throw new UndecidedOperationException(); // delete 다음은 정해진바 없음
     }
   },
    // 이하 만약 지원한다면...

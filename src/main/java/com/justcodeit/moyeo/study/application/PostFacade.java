@@ -3,6 +3,7 @@ package com.justcodeit.moyeo.study.application;
 import com.justcodeit.moyeo.study.application.exception.NotFoundPostException;
 import com.justcodeit.moyeo.study.common.PostIdGenerator;
 import com.justcodeit.moyeo.study.model.post.ReqCreatePostDto;
+import com.justcodeit.moyeo.study.model.post.ReqUpdatePostDto;
 import com.justcodeit.moyeo.study.model.post.ResMyPostDto;
 import com.justcodeit.moyeo.study.model.post.ResPostDetailDto;
 import com.justcodeit.moyeo.study.model.post.ResPostListDto;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +29,23 @@ public class PostFacade {
     var post = dto.toEntity(idGenerator, LocalDateTime.now(), 0);
     postRepository.save(post);
     return post.getPostId();
+  } // todo need refactor
+
+  @Transactional
+  public String updatePost(ReqUpdatePostDto dto) {
+    var post = findUsersPost(dto.getPostId(), dto.getUserId());
+    var updated = buildUpdate(post, dto);
+    postRepository.save(updated);
+    return updated.getPostId();
+  } // todo need refactor
+
+  private Post buildUpdate(Post p, ReqUpdatePostDto d){
+    var skills = d.skills();
+    p.edit(d.getTitle(), d.getDescribe(), d.getContact(), d.getGroupType(), d.getGatherType(),
+        skills, d.getMembers());
+    return p;
   }
+
 
   @Transactional
   public String updateState(String userId, String postId) {
@@ -39,6 +57,7 @@ public class PostFacade {
     return post.getPostId();
   }
 
+  @Async
   @Transactional
   public void delete(String userId, String postId) {
     var post = findUsersPost(postId, userId);

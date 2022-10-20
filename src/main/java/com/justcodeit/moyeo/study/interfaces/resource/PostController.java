@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -34,12 +37,12 @@ public class PostController {
   @Operation(summary = "모집글 리스트 조회 ", description = "모집글 리스트 조회 pagination ")
   @GetMapping("post")
   public ResponseEntity<ResPostListDto> getPostList(
-      @Parameter(required = false) String keyword,
-      @Parameter(required = false) String skillCodes,
+      @RequestParam(defaultValue = "") String keyword,
+      @RequestParam(defaultValue = "") String skillCodes,
       @Parameter(schema = @Schema(minimum = "0", defaultValue = "0")) int pageNo,
       @Parameter(schema = @Schema(minimum = "0", defaultValue = "20")) int pageSize) {
 
-    var codes = Arrays.asList(skillCodes.split(","));
+    var codes = split(skillCodes);
     var res = facade.findPosts(keyword, codes, pageNo, pageSize);
 
     return ResponseEntity.ok(res);
@@ -64,7 +67,12 @@ public class PostController {
       @Parameter(hidden = true) @AuthenticationPrincipal UserToken userToken,
       @RequestBody PutPostRequestDto dto) {
 
-    var res = facade.createPost(dto.toModel(userToken.getUserId()));
+    String res;
+    if (dto.isCreateOperation()) {
+      res = facade.createPost(dto.toCreateModel(userToken.getUserId()));
+    } else {
+      res = facade.updatePost(dto.toUpdateModel(userToken.getUserId()));
+    }
 
     return new ResponseEntity<>(res, HttpStatus.CREATED);
   }
@@ -90,7 +98,7 @@ public class PostController {
       @Parameter(hidden = true) @AuthenticationPrincipal UserToken userToken,
       @PathVariable String postId) {
 
-    facade.delete(userToken.getUserId(), postId);
+    facade.delete(userToken.getUserId(), postId); // 삭제였나.. update인가..
 
     return new ResponseEntity<>(postId, HttpStatus.ACCEPTED);
   }
@@ -108,5 +116,13 @@ public class PostController {
     var res = facade.findMyPosts(userToken.getUserId(), pageNo, pageSize);
 
     return ResponseEntity.ok(res);
+  }
+
+
+  private List<String> split(String param) {
+    if (param == null || param.isBlank()) {
+      return Collections.emptyList();
+    }
+    return Arrays.asList(param.split(","));
   }
 }
