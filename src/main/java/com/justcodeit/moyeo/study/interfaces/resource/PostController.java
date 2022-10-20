@@ -1,6 +1,6 @@
 package com.justcodeit.moyeo.study.interfaces.resource;
 
-import com.justcodeit.moyeo.study.application.PostFacade;
+import com.justcodeit.moyeo.study.application.PostService;
 import com.justcodeit.moyeo.study.interfaces.dto.PutPostRequest;
 import com.justcodeit.moyeo.study.model.jwt.UserToken;
 import com.justcodeit.moyeo.study.model.post.ResMyPostDto;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostController {
 
-  private final PostFacade facade;
+  private final PostService facade;
 
 
   @Operation(summary = "모집글 리스트 조회 ", description = "모집글 리스트 조회 pagination ")

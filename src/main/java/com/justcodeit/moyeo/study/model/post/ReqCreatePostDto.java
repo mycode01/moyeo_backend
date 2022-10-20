@@ -1,12 +1,10 @@
 package com.justcodeit.moyeo.study.model.post;
 
-import com.justcodeit.moyeo.study.common.PostIdGenerator;
 import com.justcodeit.moyeo.study.model.type.GatherType;
 import com.justcodeit.moyeo.study.model.type.GroupType;
 import com.justcodeit.moyeo.study.model.type.PostState;
 import com.justcodeit.moyeo.study.persistence.Post;
 import com.justcodeit.moyeo.study.persistence.PostSkill;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +26,12 @@ public class ReqCreatePostDto {
   private final List<String> skillCode;
   private final Map<String, Integer> members;
 
-  public Post toEntity(PostIdGenerator idGenerator, LocalDateTime postDate, long hits) {
+  public Post toEntity(String postId, LocalDateTime postDate, long hits) {
     Set<PostSkill> sk = skillCode.stream().map(PostSkill::new).collect(Collectors.toSet());
-    var post = new Post(idGenerator.postId(), this.userId, PostState.ON_RECRUITING,
+    var post = new Post(postId, this.userId, PostState.ON_RECRUITING,
         this.title, this.describe, this.contact, this.groupType,
         this.gatherType, this.members, sk, postDate, hits);
-    sk.forEach(e->e.setPost(post));
+    sk.forEach(e -> e.setPost(post));
     return post;
   }
 }

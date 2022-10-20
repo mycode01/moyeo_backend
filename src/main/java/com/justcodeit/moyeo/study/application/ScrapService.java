@@ -5,7 +5,6 @@ import com.justcodeit.moyeo.study.model.scrap.ResMyScrapDto;
 import com.justcodeit.moyeo.study.persistence.Scrap;
 import com.justcodeit.moyeo.study.persistence.repository.ScrapRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

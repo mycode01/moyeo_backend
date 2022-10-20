@@ -5,7 +5,6 @@ import com.justcodeit.moyeo.study.model.type.GroupType;
 import com.justcodeit.moyeo.study.model.type.PostState;
 import com.justcodeit.moyeo.study.persistence.Post;
 import com.justcodeit.moyeo.study.persistence.PostSkill;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;

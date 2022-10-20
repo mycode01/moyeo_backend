@@ -20,14 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class PostFacade {
+public class PostService {
 
   private final PostRepository postRepository;
   private final PostIdGenerator idGenerator;
 
   @Transactional
   public String createPost(ReqCreatePostDto dto) {
-    var post = dto.toEntity(idGenerator, LocalDateTime.now(), 0);
+    var postId = idGenerator.postId();
+    var post = dto.toEntity(postId, LocalDateTime.now(), 0);
     postRepository.save(post);
     return post.getPostId();
   } // todo need refactor
