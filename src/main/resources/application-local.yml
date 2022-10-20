@@ -11,6 +11,7 @@ spring:
     password:
     driver-class-name: org.h2.Driver
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
     show-sql: true
@@ -23,6 +24,9 @@ spring:
     include:
       - oauth
       - aws
+  sql:
+    init:
+      data-locations: classpath*:data-local.sql
 
 logging:
   level:

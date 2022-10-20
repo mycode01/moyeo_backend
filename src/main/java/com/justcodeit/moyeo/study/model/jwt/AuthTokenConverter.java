@@ -27,7 +27,7 @@ public class AuthTokenConverter {
     Map<String, Object> claims = new HashMap<>() {{
       put("email", principal.getEmail());
       put("role", principal.getRoleType());
-      put("nickname", principal.getNickName());
+      put("nickname", principal.getNickname());
       put("userId", principal.getUserId());
     }};
 

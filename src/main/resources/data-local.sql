@@ -1,0 +1,1 @@
+insert into users (user_id, nickname, email, introduce, picture, role, display_name, domestic_id, provider_type) values ('U183f44e31fe0002', 'defaultnickname', 'nowhere@void.com', 'introduce text', 'https://lh3.googleusercontent.com/a/ALm5wu0x6EW32vBNwc_cduQ4JBS_T-pKpYd5sSz4Fcpe=s96-c', 'USER', 'defaultdisplayname', '10001675864789688726a', 'google');

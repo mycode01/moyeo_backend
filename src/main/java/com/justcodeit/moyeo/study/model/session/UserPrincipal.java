@@ -89,6 +89,8 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
     return null;
   }
 
+  public String getNickname(){ return this.nickname; }
+
   public static UserPrincipal create(User user) {
     return new UserPrincipal(
         user.getDisplayName(),
