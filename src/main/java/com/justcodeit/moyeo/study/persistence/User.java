@@ -1,11 +1,13 @@
 package com.justcodeit.moyeo.study.persistence;
 
 import com.justcodeit.moyeo.study.model.type.Role;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -13,9 +15,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "users", // user가 예약어
     indexes = {
         @Index(columnList = "email"),
@@ -44,6 +49,15 @@ public class User {
   private String displayName; // oauth provider 가 전달하는 이름(혹은 해당 서비스에서의 닉네임), moyeo 내의 닉네임이랑은 다름
   private String providerType;
   private String domesticId; // provider가 가지고 있는 유저 구분값
+
+
+  @CreatedDate
+  @Column(updatable = false)
+  private LocalDateTime createdAt;
+
+  @LastModifiedDate
+  private LocalDateTime updatedAt;
+
 
   private User() {
   }

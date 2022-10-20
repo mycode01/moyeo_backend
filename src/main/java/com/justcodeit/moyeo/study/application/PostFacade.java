@@ -39,14 +39,6 @@ public class PostFacade {
     return updated.getPostId();
   } // todo need refactor
 
-  private Post buildUpdate(Post p, ReqUpdatePostDto d){
-    var skills = d.skills();
-    p.edit(d.getTitle(), d.getDescribe(), d.getContact(), d.getGroupType(), d.getGatherType(),
-        skills, d.getMembers());
-    return p;
-  }
-
-
   @Transactional
   public String updateState(String userId, String postId) {
     var post = findUsersPost(postId, userId);
@@ -60,8 +52,7 @@ public class PostFacade {
   @Async
   @Transactional
   public void delete(String userId, String postId) {
-    var post = findUsersPost(postId, userId);
-    postRepository.delete(post);
+    postRepository.deleteByOwnerIdAndPostId(userId, postId);
   }
 
   public ResMyPostDto findMyPosts(String userId, int pageNo, int pageSize) {
@@ -94,6 +85,13 @@ public class PostFacade {
   private ResMyPostDto findUserPosts(String userId, int pageNo, int pageSize) {
     return ResMyPostDto.toModel(
         postRepository.findByOwnerId(userId, PageRequest.of(pageNo, pageSize)));
+  }
+
+  private Post buildUpdate(Post p, ReqUpdatePostDto d) {
+    var skills = d.skills();
+    p.edit(d.getTitle(), d.getDescribe(), d.getContact(), d.getGroupType(), d.getGatherType(),
+        skills, d.getMembers());
+    return p;
   }
 
 }

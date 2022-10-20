@@ -12,4 +12,6 @@ public interface PostRepository extends JpaRepository<Post, Long>, PostCustomRep
 
   Slice<Post> findByOwnerId(String ownerId, Pageable pageable);
 
+  void deleteByOwnerIdAndPostId(String userId, String postId);
+
 }

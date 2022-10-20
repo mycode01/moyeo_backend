@@ -1,29 +1,21 @@
 package com.justcodeit.moyeo.study.persistence.repository;
 
-import static com.querydsl.core.group.GroupBy.groupBy;
-import static com.querydsl.core.types.Projections.list;
-import static com.querydsl.core.types.Projections.map;
-
 import com.justcodeit.moyeo.study.model.post.QQueryPostsProjection_PostSkillProjection;
 import com.justcodeit.moyeo.study.model.post.QQueryPostsProjection_ProjectionBuilder;
 import com.justcodeit.moyeo.study.model.post.QueryPostsProjection;
 import com.justcodeit.moyeo.study.model.post.QueryPostsProjection.PostSkillProjection;
 import com.justcodeit.moyeo.study.model.post.QueryPostsProjection.ProjectionBuilder;
-import com.justcodeit.moyeo.study.persistence.PostSkill;
 import com.justcodeit.moyeo.study.persistence.QPost;
 import com.justcodeit.moyeo.study.persistence.QPostSkill;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
-import org.springframework.security.core.parameters.P;
 
 @RequiredArgsConstructor
 public class PostCustomRepositoryImpl implements PostCustomRepository {

@@ -9,6 +9,7 @@ public enum ErrorCode {
   METHOD_NOT_ALLOWED(405, "B002", "Invalid Input Value"),
   HANDLE_ACCESS_DENIED(403, "B006", "Access is Denied"),
   INVALID_OPERATION(400, "B010", "Invalid Operation"),
+  DUPLICATED_OPERATION(409, "B011", "Duplicated Operation"),
   INTERNAL_SERVER_ERROR(500, "C004", "Server Error"),
   INVALID_TYPE_VALUE(400, "C005", "Invalid Type Value"),
 

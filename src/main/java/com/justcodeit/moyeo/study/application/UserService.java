@@ -1,6 +1,6 @@
 package com.justcodeit.moyeo.study.application;
 
-import com.justcodeit.moyeo.study.model.type.NotFoundUserException;
+import com.justcodeit.moyeo.study.application.exception.NotFoundUserException;
 import com.justcodeit.moyeo.study.model.user.ReqUpdateUserDto;
 import com.justcodeit.moyeo.study.model.user.UserInfoDto;
 import com.justcodeit.moyeo.study.persistence.repository.UserRepository;

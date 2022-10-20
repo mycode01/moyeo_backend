@@ -1,5 +1,6 @@
 package com.justcodeit.moyeo.study.interfaces;
 
+import com.justcodeit.moyeo.study.application.exception.AlreadyExistScrapException;
 import com.justcodeit.moyeo.study.interfaces.dto.FailureRes;
 import com.justcodeit.moyeo.study.interfaces.dto.FailureRes.ValidationError;
 import com.justcodeit.moyeo.study.model.type.ErrorCode;
@@ -22,8 +23,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
 
 
-  @ExceptionHandler(MoyeoException.class)
-  public ResponseEntity<Object> globalExceptionHandler(MoyeoException e) {
+
+  @ExceptionHandler(AlreadyExistScrapException.class)
+  public ResponseEntity<Object> AlreadyExistsScrapExceptionHandler(AlreadyExistScrapException e) {
     return handleExceptionInternal(e);
   }
 
@@ -36,6 +38,11 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
   public ResponseEntity<Object> accessDeniedExceptionHandler(AccessDeniedException e) {
     ErrorCode errorCode = ErrorCode.HANDLE_ACCESS_DENIED;
     return handleExceptionInternal(errorCode);
+  }
+
+  @ExceptionHandler(MoyeoException.class)
+  public ResponseEntity<Object> globalExceptionHandler(MoyeoException e) {
+    return handleExceptionInternal(e);
   }
 
   @Override
