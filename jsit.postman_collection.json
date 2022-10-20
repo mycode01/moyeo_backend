@@ -1,0 +1,501 @@
+{
+	"info": {
+		"_postman_id": "d0766aaf-83d2-488e-99c6-246bc4021acf",
+		"name": "jsit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "post get my",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/post/my?pageNo=0&pageSize=20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"my"
+							],
+							"query": [
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/post?pageSize=2&pageNo=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "keyword",
+									"value": "title",
+									"disabled": true
+								},
+								{
+									"key": "skillCodes",
+									"value": "4231",
+									"disabled": true
+								},
+								{
+									"key": "pageNo",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/post/P183f4ebb11a0001",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"P183f4ebb11a0001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post create",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"title\": \"title1\",\n\"describe\": \"desc\",\n\"groupType\": \"BASIC_STUDY\",\n\"gatherType\": \"ONLINE\",\n\"contact\": \"0108557423\",\n\"skillCode\": [\"123\",\"321\",\"lll\"],\n\"members\": {\n    \"additionalProp1\": 0,\n    \"additionalProp2\": 0,\n    \"additionalProp3\": 0\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\":\"P183f38e2ede0003\",\n\"title\": \"title2\",\n\"describe\": \"updated desc\",\n\"groupType\": \"BASIC_PROJECT\",\n\"gatherType\": \"OFFLINE\",\n\"contact\": \"0108557423\",\n\"skillCode\": [\"293\",\"1111\"],\n\"members\": {\n    \"additionalProp1\": 0,\n    \"additionalProp2\": 0\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post state patch",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/post/P183f4c8042b0001",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"P183f4c8042b0001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/post/P183f4d0e9a70001",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"P183f4d0e9a70001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get myinfo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/user/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update info",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nickname\" : \"newnickname\", \n    \"introduce\": \"newintroduce\",\n    \"skills\":[\"skillcode1\",\"skillcode2\",\"skillcode3\",\"skillcode1\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/user/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get userinfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user/U183f44e31fe0002",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"U183f44e31fe0002"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "scrap",
+			"item": [
+				{
+					"name": "create scrap",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/scrap/123123",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scrap",
+								"123123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get scrap",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/scrap?pageNo=0&pageSize=20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scrap"
+							],
+							"query": [
+								{
+									"key": "pageNo",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete scrap",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-moyeo-auth-token",
+								"value": "{{authtoken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/scrap/123123",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scrap",
+								"123123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stacklist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stack",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stack"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// JWT generation script adapted from",
+					"// https://gist.github.com/corbanb/db03150abbe899285d6a86cc480f674d",
+					"",
+					"var jwtSecret = 'ObN1YjTovA4khj07ox/L5OUVx5g55KOY272DCU2ARtk='",
+					"",
+					"// Set headers for JWT",
+					"var header = {",
+					"'alg': 'HS256'",
+					"};",
+					"",
+					"// Prepare timestamp in seconds",
+					"var currentTimestamp = Math.floor(Date.now() / 1000)",
+					"",
+					"var data = {",
+					"  \"role\": \"ROLE_USER\",",
+					"  \"displayName\": \"youngil kim\",",
+					"  \"email\": \"testunit4885@gmail.com\",",
+					"  \"userId\": \"U183f44e31fe0002\"",
+					"}",
+					"",
+					"",
+					"function base64url(source) {",
+					"// Encode in classical base64",
+					"encodedSource = CryptoJS.enc.Base64.stringify(source)",
+					"",
+					"// Remove padding equal characters",
+					"encodedSource = encodedSource.replace(/=+$/, '')",
+					"",
+					"// Replace characters according to base64url specifications",
+					"encodedSource = encodedSource.replace(/\\+/g, '-')",
+					"encodedSource = encodedSource.replace(/\\//g, '_')",
+					"",
+					"return encodedSource",
+					"}",
+					"",
+					"// encode header",
+					"var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header))",
+					"var encodedHeader = base64url(stringifiedHeader)",
+					"",
+					"// encode data",
+					"var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data))",
+					"var encodedData = base64url(stringifiedData)",
+					"",
+					"// build token",
+					"var token = `${encodedHeader}.${encodedData}`",
+					"",
+					"// sign token",
+					"var signature = CryptoJS.HmacSHA256(token, jwtSecret)",
+					"signature = base64url(signature)",
+					"var signedToken = `${token}.${signature}`",
+					"",
+					"pm.collectionVariables.set(\"authtoken\", signedToken);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "authtoken",
+			"value": ""
+		},
+		{
+			"key": "secret",
+			"value": ""
+		}
+	]
+}
