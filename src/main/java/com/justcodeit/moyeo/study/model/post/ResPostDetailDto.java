@@ -23,6 +23,7 @@ public class ResPostDetailDto {
   private final String title;
   private final String content;
   private final String contact;
+  private final long hits;
   private final GroupType groupType;
   private final GatherType gatherType;
   private final Set<String> skillTags;
@@ -30,7 +31,7 @@ public class ResPostDetailDto {
 
   public static ResPostDetailDto fromEntity(Post p) {
     return new ResPostDetailDto(p.getPostId(), p.getOwnerId(), p.getState(), p.getTitle(),
-        p.getContent(), p.getContact(), p.getGroupType(), p.getGatherType(),
+        p.getContent(), p.getContact(), p.getHits(), p.getGroupType(), p.getGatherType(),
         skill(p.getSkillTags()), p.getRecruitMember());
   }
 

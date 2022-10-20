@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -104,6 +105,7 @@ public class Post {
     setSkill(skillTags); //
   }
 
+  //region operations
   private void setSkill(Set<PostSkill> skillTags){
     this.skillTags.clear();
 //    this.skillTags = skillTags; // hibernate 가 구현하는 방식에 어긋나 문제가 발생함
@@ -119,7 +121,11 @@ public class Post {
     this.state = this.state.next();
   }
 
+  public void hitsUp(Function<Long, Long> func){
+    this.hits = func.apply(this.hits);
+  }
 
+  //endregion
 
   // region getters
   public String getPostId() {

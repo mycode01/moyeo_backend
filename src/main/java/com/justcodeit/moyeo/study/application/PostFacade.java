@@ -11,6 +11,7 @@ import com.justcodeit.moyeo.study.persistence.Post;
 import com.justcodeit.moyeo.study.persistence.repository.PostRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Async;
@@ -55,18 +56,23 @@ public class PostFacade {
     postRepository.deleteByOwnerIdAndPostId(userId, postId);
   }
 
+  @Transactional(readOnly = true)
   public ResMyPostDto findMyPosts(String userId, int pageNo, int pageSize) {
     return findUserPosts(userId, pageNo, pageSize);
   }
 
+  @Transactional(readOnly = true)
   public ResPostListDto findPosts(String keyword, List<String> skillCodes,
       int pageNo, int pageSize) {
     return ResPostListDto.toModel(
         postRepository.findByKeywordAndSkillCode(keyword, skillCodes, pageNo, pageSize));
   }
 
+  @Transactional
   public ResPostDetailDto findPost(String postId) {
     var post = postRepository.findByPostId(postId).orElseThrow(NotFoundPostException::new);
+    post.hitsUp(standardHitsUp);
+    postRepository.save(post);
     return ResPostDetailDto.fromEntity(post);
   }
 
@@ -93,5 +99,7 @@ public class PostFacade {
         skills, d.getMembers());
     return p;
   }
+
+  private Function<Long, Long> standardHitsUp = l -> ++l;
 
 }
