@@ -5,17 +5,16 @@ import com.justcodeit.moyeo.study.model.type.GroupType;
 import com.justcodeit.moyeo.study.model.type.PostState;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -95,7 +94,7 @@ public class Post {
   }
 
   public void edit(String title, String content, String contact, GroupType groupType,
-      GatherType gatherType, Set<PostSkill> skillTags, Map<String, Integer> member){
+      GatherType gatherType, Set<PostSkill> skillTags, Map<String, Integer> member) {
     this.title = title;
     this.content = content;
     this.contact = contact;
@@ -106,11 +105,11 @@ public class Post {
   }
 
   //region operations
-  private void setSkill(Set<PostSkill> skillTags){
+  private void setSkill(Set<PostSkill> skillTags) {
     this.skillTags.clear();
 //    this.skillTags = skillTags; // hibernate 가 구현하는 방식에 어긋나 문제가 발생함
     this.skillTags.addAll(skillTags);
-    this.skillTags.forEach(e->e.setPost(this));
+    this.skillTags.forEach(e -> e.setPost(this));
   }
 
   public boolean isOwner(String userId) {
@@ -121,7 +120,7 @@ public class Post {
     this.state = this.state.next();
   }
 
-  public void hitsUp(Function<Long, Long> func){
+  public void hitsUp(Function<Long, Long> func) {
     this.hits = func.apply(this.hits);
   }
 

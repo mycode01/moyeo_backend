@@ -8,38 +8,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "skill")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private SkillCategory skillCategory;
+    private SkillCategory category;
+
+    private String skillCode;
     private String folderName;
     private String name;
     private String imageUrl;
 
+    private Skill(){}
+
     public Skill(SkillCategory skillCategory, String folderName, String name, String imageUrl) {
-        this.skillCategory = skillCategory;
+        this.category = skillCategory;
         this.folderName = folderName;
         this.name = name;
         this.imageUrl = imageUrl;
     }
 
-    public Skill update(String name, String imageUrl) {
-        this.name = name;
-        this.imageUrl = imageUrl;
-        return this;
+
+    public SkillCategory getCategory() {
+        return category;
     }
 
-    public SkillCategory getSkillCategory() {
-        return skillCategory;
+    public String getSkillCode() {
+        return skillCode;
     }
 
     public String getFolderName() {

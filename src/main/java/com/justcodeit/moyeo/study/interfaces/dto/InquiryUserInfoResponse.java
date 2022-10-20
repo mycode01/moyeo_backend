@@ -7,17 +7,16 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class InquiryMyInfoResponseDto {
+public class InquiryUserInfoResponse {
 
   private final String userId;
   private final String nickname;
-  private final String email;
   private final String introduce;
   private final String picture;
   private final Set<String> skills;
 
-  public static InquiryMyInfoResponseDto fromUserInfo(UserInfoDto d) {
-    return new InquiryMyInfoResponseDto(d.getUserId(), d.getNickname(), d.getEmail(),
+  public static InquiryUserInfoResponse fromUserInfo(UserInfoDto d) {
+    return new InquiryUserInfoResponse(d.getUserId(), d.getNickname(),
         d.getIntroduce(), d.getPicture(), d.getSkills());
   }
 }

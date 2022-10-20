@@ -1,7 +1,7 @@
 package com.justcodeit.moyeo.study.interfaces.resource;
 
 import com.justcodeit.moyeo.study.application.PostFacade;
-import com.justcodeit.moyeo.study.interfaces.dto.PutPostRequestDto;
+import com.justcodeit.moyeo.study.interfaces.dto.PutPostRequest;
 import com.justcodeit.moyeo.study.model.jwt.UserToken;
 import com.justcodeit.moyeo.study.model.post.ResMyPostDto;
 import com.justcodeit.moyeo.study.model.post.ResPostDetailDto;
@@ -65,7 +65,7 @@ public class PostController {
   @PutMapping("post")
   public ResponseEntity<String> createPost(
       @Parameter(hidden = true) @AuthenticationPrincipal UserToken userToken,
-      @RequestBody PutPostRequestDto dto) {
+      @RequestBody PutPostRequest dto) {
 
     String res;
     if (dto.isCreateOperation()) {

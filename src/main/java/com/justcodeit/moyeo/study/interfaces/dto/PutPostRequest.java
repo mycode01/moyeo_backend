@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PutPostRequestDto {
+public class PutPostRequest {
 
   private final String postId;
   private final String title;
