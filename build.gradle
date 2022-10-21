@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+	id 'groovy'
 }
 
 group = 'com.justcodeit.moyeo'
@@ -47,6 +48,10 @@ dependencies {
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-3.0'
+	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.0-groovy-3.0'
+	testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.8', ext: 'pom'
 
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.311'
 	implementation 'org.apache.commons:commons-text:1.9'

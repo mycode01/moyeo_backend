@@ -9,7 +9,5 @@ public interface ScrapRepository extends JpaRepository<Scrap, Long> {
 
   Slice<Scrap> findByUserId(String userId, Pageable pageable);
 
-  Slice<Scrap> findByUserIdAndPostId(String userId, String postId);
-
   void deleteByUserIdAndPostId(String userId, String postId);
 }

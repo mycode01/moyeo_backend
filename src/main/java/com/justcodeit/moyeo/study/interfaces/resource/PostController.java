@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostController {
 
-  private final PostService facade;
+  private final PostService service;
 
 
   @Operation(summary = "모집글 리스트 조회 ", description = "모집글 리스트 조회 pagination ")
@@ -43,7 +43,7 @@ public class PostController {
       @Parameter(schema = @Schema(minimum = "0", defaultValue = "20")) int pageSize) {
 
     var codes = split(skillCodes);
-    var res = facade.findPosts(keyword, codes, pageNo, pageSize);
+    var res = service.findPosts(keyword, codes, pageNo, pageSize);
 
     return ResponseEntity.ok(res);
   }
@@ -53,7 +53,7 @@ public class PostController {
   @GetMapping("post/{postId}")
   public ResponseEntity<ResPostDetailDto> getPost(@PathVariable String postId) {
 
-    var res = facade.findPost(postId);
+    var res = service.findPost(postId);
 
     return ResponseEntity.ok(res);
   }
@@ -69,9 +69,9 @@ public class PostController {
 
     String res;
     if (dto.isCreateOperation()) {
-      res = facade.createPost(dto.toCreateModel(userToken.getUserId()));
+      res = service.createPost(dto.toCreateModel(userToken.getUserId()));
     } else {
-      res = facade.updatePost(dto.toUpdateModel(userToken.getUserId()));
+      res = service.updatePost(dto.toUpdateModel(userToken.getUserId()));
     }
 
     return new ResponseEntity<>(res, HttpStatus.CREATED);
@@ -85,7 +85,7 @@ public class PostController {
       @Parameter(hidden = true) @AuthenticationPrincipal UserToken userToken,
       @PathVariable String postId) {
 
-    var res = facade.updateState(userToken.getUserId(), postId);
+    var res = service.updateState(userToken.getUserId(), postId);
 
     return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
   }
@@ -98,7 +98,7 @@ public class PostController {
       @Parameter(hidden = true) @AuthenticationPrincipal UserToken userToken,
       @PathVariable String postId) {
 
-    facade.delete(userToken.getUserId(), postId); // 삭제였나.. update인가..
+    service.delete(userToken.getUserId(), postId); // 삭제였나.. update인가..
 
     return new ResponseEntity<>(postId, HttpStatus.ACCEPTED);
   }
@@ -113,7 +113,7 @@ public class PostController {
       @Parameter(schema = @Schema(minimum = "0", defaultValue = "0")) int pageNo,
       @Parameter(schema = @Schema(minimum = "0", defaultValue = "20")) int pageSize) {
 
-    var res = facade.findMyPosts(userToken.getUserId(), pageNo, pageSize);
+    var res = service.findMyPosts(userToken.getUserId(), pageNo, pageSize);
 
     return ResponseEntity.ok(res);
   }

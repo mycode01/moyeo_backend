@@ -92,7 +92,7 @@ public class PostCustomRepositoryImpl implements PostCustomRepository {
   private List<QueryPostsProjection> map(List<ProjectionBuilder> res,
       Map<String, List<PostSkillProjection>> skillMap) {
     return res.stream().map(e -> {
-          var p = skillMap.get(e.getPostId());
+          var p = skillMap.getOrDefault(e.getPostId(), List.of());
           e.skillCodes(p.stream().map(PostSkillProjection::getSkillCode).collect(Collectors.toList()));
           return e.build();
         }
