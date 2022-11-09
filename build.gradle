@@ -35,11 +35,7 @@ dependencies {
 	compileOnly "org.projectlombok:lombok:${lombokVersion}"
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
-	implementation "org.mapstruct:mapstruct:${mapStructVersion}"
-	implementation "org.projectlombok:lombok-mapstruct-binding:${mapstructBindingVersion}"
 
-	annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
-	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapstructBindingVersion}"
 	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -53,8 +49,6 @@ dependencies {
 	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.0-groovy-3.0'
 	testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.8', ext: 'pom'
 
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.311'
-	implementation 'org.apache.commons:commons-text:1.9'
 }
 
 tasks.named('test') {
